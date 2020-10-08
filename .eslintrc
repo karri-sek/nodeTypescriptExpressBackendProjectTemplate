@@ -6,12 +6,15 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:shopify/esnext",
     "prettier"
   ],
   "rules": {
     "no-console": 2, //means error!,
     "no-loops/no-loops": 2,
     "prettier/prettier": 2
+  },
+  "env": {
+    "es6": true,
+    "node": true
   }
 }
