@@ -1,6 +1,6 @@
-import Application from '../application';
+import Application from '../../application';
 import chai from 'chai';
-import chaiHttp  from 'chai-http';
+import chaiHttp from 'chai-http';
 import 'mocha';
 chai.use(chaiHttp);
 
@@ -10,7 +10,7 @@ describe('HealthCheck request', () => {
     return chai
       .request(app)
       .get('/healthcheck')
-        .then((res) => {
+      .then((res) => {
         chai.expect(res.status).to.eql(200);
       });
   });

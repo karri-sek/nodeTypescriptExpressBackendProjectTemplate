@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
-import { healthCheck } from './routes/healthCheck';
+import { healthCheckRoute } from './routes/healthCheck';
 const Application = (): Express => {
   const app: Express = express();
-  app.use('/healthcheck', healthCheck);
+  app.use('/healthcheck', healthCheckRoute);
   return app;
 };
 

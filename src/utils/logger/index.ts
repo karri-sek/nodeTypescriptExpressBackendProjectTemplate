@@ -2,7 +2,7 @@ import * as winston from 'winston';
 export const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
+  defaultMeta: { service: 'woodpecker' },
   transports: [
     //
     // - Write all logs with level `error` and below to `error.log`
