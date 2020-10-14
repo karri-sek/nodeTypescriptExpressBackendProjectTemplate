@@ -11,8 +11,8 @@ export class HealthCheckController {
   ) {
     this.healthCheck = healthCheck;
   }
-  public async  getHealthCheck(req: Request, res: Response) {
-    const status =  this.healthCheck.getStatus();
+  public async getHealthCheck(req: Request, res: Response) {
+    const status = this.healthCheck.getStatus();
     res.send(status);
   }
 }
