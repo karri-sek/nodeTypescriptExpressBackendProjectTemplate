@@ -8,7 +8,7 @@
     "dev": "tsnd --respawn --transpile-only ./src/server.ts",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "lint": "eslint src/**/*.ts",
-    "lint-and-fix": "eslint . --ext .ts --fix",
+    "lint-and-fix": "eslint src/**/*.ts && eslint --ext .ts --fix",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "prettier-watch": "onchange 'src/**/*.ts' -- prettier --write {{changed}}"
   },
@@ -19,7 +19,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run prettier-format && yarn run lint",
+      "pre-commit": "yarn run prettier-format && yarn run lint && yarn test",
       "pre-push": ""
     }
   },

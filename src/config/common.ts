@@ -1,5 +1,6 @@
 'use strict';
 import joi from 'joi';
+import { logger } from '../utils/logger';
 import EnvTypes from '../types/enum/envTypes';
 
 const envVarsSchema = joi
@@ -20,7 +21,7 @@ const envVarsSchema = joi
   .required();
 const { error, value: envVars } = envVarsSchema.validate(process.env);
 if (error) {
-  throw new Error(`common config validation error: ${error.message}`);
+  logger.error(`common config validation error: ${error.message}`);
 }
 export const config = {
   env: envVars.NODE_ENV,

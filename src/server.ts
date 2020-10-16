@@ -2,22 +2,15 @@ import fs from 'fs';
 import https from 'https';
 import Application from './application';
 import { logger } from './utils/logger';
-import getCertificatePath from './utils/certificate/getCertificatePath';
-import isProductionEnv from './utils/env/isProductionEnv';
 import config from './config/index';
 (async (SECUREPORT) => {
   const app = Application();
 
   try {
-    const { certPath, certKeyPath, caCertPath } = getCertificatePath(
-      isProductionEnv(),
-      process.cwd()
-    );
-
     const httpsCreds = {
-      cert: fs.readFileSync(certPath),
-      key: fs.readFileSync(certKeyPath),
-      ca: fs.readFileSync(caCertPath)
+      cert: fs.readFileSync(config.server.certPath),
+      key: fs.readFileSync(config.server.certKeyPath),
+      ca: fs.readFileSync(config.server.caCertPath)
     };
     await https.createServer(httpsCreds, app).listen(SECUREPORT);
     logger.info(`Server listening on port ${SECUREPORT}`);
