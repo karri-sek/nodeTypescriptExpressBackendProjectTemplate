@@ -1,18 +1,21 @@
-import dotenv from 'dotenv';
+import fs from 'fs';
+import https from 'https';
 import Application from './application';
 import { logger } from './utils/logger';
-
-dotenv.config({
-  path: '.env'
-});
-
+import config from './config/index';
 (async (SECUREPORT) => {
   const app = Application();
 
   try {
-    app.listen(SECUREPORT);
+    const httpsCreds = {
+      cert: fs.readFileSync(config.server.certPath),
+      key: fs.readFileSync(config.server.certKeyPath),
+      ca: fs.readFileSync(config.server.caCertPath)
+    };
+    await https.createServer(httpsCreds, app).listen(SECUREPORT);
     logger.info(`Server listening on port ${SECUREPORT}`);
+    logger.info(`https://localhost:${SECUREPORT}`);
   } catch (e) {
-    logger.error('No HTTPS version of the server running', e);
+    logger.info('No HTTPS version of the server running');
   }
-})(parseInt(process.env.APP_PORT || '', 10) || 3002);
+})(parseInt(config.server.port || '', 10) || 3002);
