@@ -40,3 +40,5 @@ typings/
 
 # do not commit certificates
 certificates/
+coverage/
+*.lock
